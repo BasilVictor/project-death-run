@@ -146,7 +146,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -320,9 +320,9 @@ MonoBehaviour:
   width: 8
   height: 8
   size: 1
-  wallPrefab: {fileID: 6526592237454231525, guid: 8e005f4733ec3aa46be59997db3588f0,
+  horizontalWall: {fileID: 6526592237454231525, guid: 8e005f4733ec3aa46be59997db3588f0,
     type: 3}
-  wallPrefab2: {fileID: 5464751420230935173, guid: 2d8d6abd72c11bc4996947a042567baa,
+  verticalWall: {fileID: 5464751420230935173, guid: 2d8d6abd72c11bc4996947a042567baa,
     type: 3}
   floorPrefab: {fileID: 6072674613672896825, guid: 5a48cc21a4e8b924c9a09f26288fb2c8,
     type: 3}

@@ -21,10 +21,10 @@ public class GameController : MonoBehaviour
     private float size = 1f;
 
     [SerializeField]
-    private Transform wallPrefab = null; //v
+    private Transform horizontalWall = null; //v
 
     [SerializeField]
-    private Transform wallPrefab2 = null; //h
+    private Transform verticalWall = null; //h
 
     [SerializeField]
     private Transform floorPrefab = null;
@@ -32,21 +32,6 @@ public class GameController : MonoBehaviour
     void Start()
     {
         var maze = MazeGenerator.Generate(width, height);
-        // for (int i = 0; i < 1; ++i)
-        // {
-        //     for (int j = 0; j < 1; ++j)
-        //     {
-        //         var position = new Vector3(-width / 2 + i, 0, -height / 2 + j);
-        //         var topWall = Instantiate(wallPrefab, transform) as Transform;
-        //         topWall.position = position + new Vector3(0, 0, size);
-        //         var leftWall = Instantiate(wallPrefab2, transform) as Transform;
-        //         leftWall.position = position + new Vector3(-size / 2, 0, 0);
-        //         var rightWall = Instantiate(wallPrefab2, transform) as Transform;
-        //         rightWall.position = position + new Vector3(+size / 2, 0, 0);
-        //         var bottomWall = Instantiate(wallPrefab, transform) as Transform;
-        //         bottomWall.position = position + new Vector3(0, 0, 0);
-        //     }
-        // }
         Draw(maze);
     }
 
@@ -60,46 +45,44 @@ public class GameController : MonoBehaviour
         {
             for (int j = 0; j < height; ++j)
             {
-                var cell = maze[i, j];
-                var position = new Vector3(-width / 2 + i, 0, -height / 2 + j);
+                var cell = maze[i,j];
+                var position = new Vector3(-width / 2 + i, 0, height / 2 - j);
 
-                // var floor = Instantiate(floorPrefab, transform) as Transform;
-                // floor.position = position;
-                // floor.GetComponent<SpriteRenderer>().sortingLayerName="Background";
+                var floor = Instantiate(floorPrefab, transform) as Transform;
+                floor.position = position + new Vector3(0, 0, size/2);;
+                floor.GetComponent<SpriteRenderer>().sortingLayerName="Background";
 
                 if (cell.HasFlag(WallState.UP))
                 {
-                    var topWall = Instantiate(wallPrefab, transform) as Transform;
+                    var topWall = Instantiate(horizontalWall, transform) as Transform;
                     topWall.position = position + new Vector3(0, 0, size);
-                    // topWall.localScale = new Vector3(size, topWall.localScale.y, topWall.localScale.z);
+                    topWall.name = "TOP: " + i + ", " + j;
                 }
 
                 if (cell.HasFlag(WallState.LEFT))
                 {
-                    var leftWall = Instantiate(wallPrefab2, transform) as Transform;
+                    var leftWall = Instantiate(verticalWall, transform) as Transform;
                     leftWall.position = position + new Vector3(-size / 2, 0, 0);
-                    // leftWall.localScale = new Vector3(size, leftWall.localScale.y, leftWall.localScale.z);
-                    // leftWall.eulerAngles = new Vector3(0, 0, 90);
+                    leftWall.name = "LEFT: " + i + ", " + j;
                 }
 
                 if (i == width - 1)
                 {
                     if (cell.HasFlag(WallState.RIGHT))
                     {
-                        var rightWall = Instantiate(wallPrefab2, transform) as Transform;
+                        var rightWall = Instantiate(verticalWall, transform) as Transform;
                         rightWall.position = position + new Vector3(+size / 2, 0, 0);
-                        // rightWall.localScale = new Vector3(size, rightWall.localScale.y, rightWall.localScale.z);
-                        // rightWall.eulerAngles = new Vector3(0, 0, 90);
+                        rightWall.name = "RIGHT: " + i + ", " + j;
                     }
                 }
 
-                if (j == 0)
+                if (j == height - 1)
                 {
                     if (cell.HasFlag(WallState.DOWN))
                     {
-                        var bottomWall = Instantiate(wallPrefab, transform) as Transform;
+                        var bottomWall = Instantiate(horizontalWall, transform) as Transform;
                         bottomWall.position = position + new Vector3(0, 0, 0);
-                        // bottomWall.localScale = new Vector3(size, bottomWall.localScale.y, bottomWall.localScale.z);
+                        bottomWall.name = "BOTTOM: " + i + ", " + j;
                     }
                 }
             }

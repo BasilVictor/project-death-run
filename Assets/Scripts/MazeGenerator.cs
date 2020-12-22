@@ -1,4 +1,13 @@
-﻿using System.Collections;
+﻿/*
+WallState::
+0000 -> NO WALLS
+1111 -> LEFT, RIGHT, UP, DOWN
+
+MAZE::
+[[(0,0), (1,0), (2,0)]
+ [(0,1), (1,1), (2,1)]]
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -6,8 +15,6 @@ using System;
 [Flags]
 public enum WallState
 {
-    // 0000 -> NO WALLS
-    // 1111 -> LEFT,RIGHT,UP,DOWN
     LEFT = 1, // 0001
     RIGHT = 2, // 0010
     UP = 4, // 0100
@@ -109,27 +116,27 @@ public class MazeGenerator : MonoBehaviour
     {
         List<Neighbour> list = new List<Neighbour>();
 
-        if (p.getX() > 0) // left
-        {
-            if (!maze[p.getX() - 1, p.getY()].HasFlag(WallState.VISITED))
-            {
-                list.Add(new Neighbour(new Position(p.getX()-1, p.getY()), WallState.LEFT));
-            }
-        }
-
-        if (p.getY() > 0) // DOWN
+        if (p.getY() > 0) // UP
         {
             if (!maze[p.getX(), p.getY() - 1].HasFlag(WallState.VISITED))
             {
-                list.Add(new Neighbour(new Position(p.getX(), p.getY()-1), WallState.DOWN));
+                list.Add(new Neighbour(new Position(p.getX(), p.getY() - 1), WallState.UP));
             }
         }
 
-        if (p.getY() < height - 1) // UP
+        if (p.getY() < height - 1) // DOWN
         {
             if (!maze[p.getX(), p.getY() + 1].HasFlag(WallState.VISITED))
             {
-                list.Add(new Neighbour(new Position(p.getX(), p.getY()+1), WallState.UP));
+                list.Add(new Neighbour(new Position(p.getX(), p.getY() + 1), WallState.DOWN));
+            }
+        }
+
+        if (p.getX() > 0) // LEFT
+        {
+            if (!maze[p.getX() - 1, p.getY()].HasFlag(WallState.VISITED))
+            {
+                list.Add(new Neighbour(new Position(p.getX() - 1, p.getY()), WallState.LEFT));
             }
         }
 
@@ -137,7 +144,7 @@ public class MazeGenerator : MonoBehaviour
         {
             if (!maze[p.getX() + 1, p.getY()].HasFlag(WallState.VISITED))
             {
-                list.Add(new Neighbour(new Position(p.getX()+1, p.getY()), WallState.RIGHT));
+                list.Add(new Neighbour(new Position(p.getX() + 1, p.getY()), WallState.RIGHT));
             }
         }
 
