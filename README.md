@@ -1,2 +1,2 @@
 # project-death-run
-wassup idk
+wassup
