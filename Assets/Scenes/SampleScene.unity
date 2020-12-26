@@ -317,14 +317,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7595d5c0236dad741984bd0c5dac49c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 8
-  height: 8
+  width: 10
+  height: 10
   size: 1
+  noOfPlayers: 2
   horizontalWall: {fileID: 6526592237454231525, guid: 8e005f4733ec3aa46be59997db3588f0,
     type: 3}
   verticalWall: {fileID: 5464751420230935173, guid: 2d8d6abd72c11bc4996947a042567baa,
     type: 3}
   floorPrefab: {fileID: 6072674613672896825, guid: 5a48cc21a4e8b924c9a09f26288fb2c8,
+    type: 3}
+  playerPrefab: {fileID: 517548219721198593, guid: eb622dc9b67f8164d88e492c70647951,
+    type: 3}
+  objPrefab: {fileID: 7875755955221023636, guid: 6b88661686a39b94bb702d24e03ab88f,
     type: 3}
 --- !u!114 &785185046
 MonoBehaviour:
